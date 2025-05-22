@@ -5,10 +5,7 @@
   <p *ngIf="error" class="error">{{ error }}</p>
 
   <ul *ngIf="!isLoading && !error">
-    <li *ngFor="let repo of repositories">
-      <strong>{{ repo.name }}</strong> by {{ repo.owner.login }}<br />
-      {{ repo.stargazers_count }} | {{ repo.open_issues_count }}
-      <p>{{ repo.description }}</p>
-    </li>
+    <app-repo-card *ngFor="let repo of repositories" [repo]="repo">
+    </app-repo-card>
   </ul>
 </div>

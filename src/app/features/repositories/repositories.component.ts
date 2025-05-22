@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GithubService } from '../../core/services/github.service';
 import { Repository } from '../../models/repository.model';
+import { RepoCardComponent } from './components/repo-card/repo-card.component';
 
 @Component({
   selector: 'app-repositories',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RepoCardComponent],
   templateUrl: './repositories.component.html',
   styleUrls: ['./repositories.component.scss'],
 })

@@ -1,0 +1,20 @@
+<div class="repo-card">
+  <div class="header">
+    <img
+      [src]="repo.owner.avatar_url"
+      alt="{{ repo.owner.login }}'s avatar"
+      class="avatar"
+    />
+    <div>
+      <h2>{{ repo.name }}</h2>
+      <p class="owner">by {{ repo.owner.login }}</p>
+    </div>
+  </div>
+
+  <p class="description">{{ repo.description }}</p>
+
+  <div class="meta">
+    ⭐ {{ repo.stargazers_count }} stars | 🐞
+    {{ repo.open_issues_count }} issues
+  </div>
+</div>
