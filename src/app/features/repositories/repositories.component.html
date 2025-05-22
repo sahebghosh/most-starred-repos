@@ -4,8 +4,8 @@
   <p *ngIf="isLoading">Loading...</p>
   <p *ngIf="error" class="error">{{ error }}</p>
 
-  <ul *ngIf="!isLoading && !error">
-    <app-repo-card *ngFor="let repo of repositories" [repo]="repo">
-    </app-repo-card>
-  </ul>
+  <app-repo-card *ngFor="let repo of repositories" [repo]="repo">
+  </app-repo-card>
+
+  <p *ngIf="isFetchingMore && !isLoading">Loading more repositories...</p>
 </div>

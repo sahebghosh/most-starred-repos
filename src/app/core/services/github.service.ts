@@ -12,15 +12,16 @@ export class GithubService {
 
   constructor(private http: HttpClient) {}
 
-  getTrendingRepositories(): Observable<Repository[]> {
+  getTrendingRepositories(page: number = 1): Observable<Repository[]> {
     const date = new Date();
     date.setDate(date.getDate() - 30);
-    const formattedDate = date.toISOString().split('T')[0]; // YYYY-MM-DD
+    const formattedDate = date.toISOString().split('T')[0];
 
     const params = new HttpParams()
       .set('q', `created:>${formattedDate}`)
       .set('sort', 'stars')
       .set('order', 'desc')
+      .set('page', page)
       .set('per_page', 30);
 
     return this.http.get<any>(this.API_URL, { params }).pipe(
