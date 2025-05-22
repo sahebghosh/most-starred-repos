@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RepositoriesComponent } from './repositories.component';
+import { GithubService } from '../../core/services/github.service';
+import { of } from 'rxjs';
 
 describe('RepositoriesComponent', () => {
   let component: RepositoriesComponent;
@@ -8,9 +9,16 @@ describe('RepositoriesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RepositoriesComponent]
-    })
-    .compileComponents();
+      imports: [RepositoriesComponent],
+      providers: [
+        {
+          provide: GithubService,
+          useValue: {
+            getTrendingRepositories: () => of([]),
+          },
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(RepositoriesComponent);
     component = fixture.componentInstance;
