@@ -1,11 +1,41 @@
 <div class="container">
-  <h1>Trending GitHub Repositories</h1>
+  <h1 *ngIf="!error">Trending GitHub Repositories</h1>
 
-  <p *ngIf="isLoading">Loading...</p>
-  <p *ngIf="error" class="error">{{ error }}</p>
+  <!-- Error Message -->
+  <div class="error-block" *ngIf="error">
+    <p class="error-message">{{ error }}</p>
+    <button class="retry-button" (click)="retry()">Retry</button>
+  </div>
 
-  <app-repo-card *ngFor="let repo of repositories" [repo]="repo">
-  </app-repo-card>
+  <!-- Initial Load Spinner -->
+  <div class="loading-container" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading repositories...</p>
+  </div>
 
-  <p *ngIf="isFetchingMore && !isLoading">Loading more repositories...</p>
+  <!-- Repo list shown after initial load -->
+  <ng-container *ngIf="!isLoading">
+    <!-- Repo Cards -->
+    <app-repo-card
+      *ngFor="let repo of repositories"
+      [repo]="repo"
+      [rating]="ratings.get(repo.name) || 0"
+      (nameClick)="onRepoClick(repo)"
+    >
+    </app-repo-card>
+
+    <!-- Repo Modal -->
+    <app-repo-modal
+      *ngIf="selectedRepo"
+      [repo]="selectedRepo"
+      (close)="selectedRepo = null"
+      (ratingSelected)="onRatingSelected($event)"
+    >
+    </app-repo-modal>
+
+    <!-- Spinner shown while fetching next page -->
+    <div class="scroll-spinner" *ngIf="isFetchingMore && !isLoading">
+      <div class="spinner small"></div>
+    </div>
+  </ng-container>
 </div>

@@ -1,20 +1,30 @@
 <div class="repo-card">
-  <div class="header">
-    <img
-      [src]="repo.owner.avatar_url"
-      alt="{{ repo.owner.login }}'s avatar"
-      class="avatar"
-    />
-    <div>
-      <h2>{{ repo.name }}</h2>
-      <p class="owner">by {{ repo.owner.login }}</p>
+  <img [src]="repo.owner.avatar_url" alt="Avatar" class="avatar" />
+
+  <div class="content">
+    <h2 class="repo-name" (click)="onNameClick()">
+      <span>{{ repo.name }}</span>
+      <span class="inline-stars" *ngIf="rating > 0">
+        <span *ngFor="let star of [1, 2, 3, 4, 5]">
+          <span [class.filled]="star <= rating">★</span>
+        </span>
+      </span>
+    </h2>
+
+    <p class="owner">by {{ repo.owner.login }}</p>
+    <p class="description">{{ repo.description }}</p>
+
+    <div class="meta-info">
+      <span class="pill"
+        >Stars: {{ repo.stargazers_count | number }} stars</span
+      >
+      <span class="pill"
+        >Issues: {{ repo.open_issues_count | number }} issues</span
+      >
+      <span class="submitted">
+        Submitted {{ getDaysSinceCreation(repo.created_at) }} days ago by
+        {{ repo.owner.login }}
+      </span>
     </div>
-  </div>
-
-  <p class="description">{{ repo.description }}</p>
-
-  <div class="meta">
-    ⭐ {{ repo.stargazers_count }} stars | 🐞
-    {{ repo.open_issues_count }} issues
   </div>
 </div>

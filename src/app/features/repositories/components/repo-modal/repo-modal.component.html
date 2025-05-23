@@ -1,0 +1,31 @@
+<div class="overlay" (click)="onClose()"></div>
+
+<div class="modal">
+  <button class="close-button" (click)="onClose()">✖</button>
+
+  <div class="modal-header">
+    <img [src]="repo.owner.avatar_url" alt="Avatar" class="avatar" />
+    <div class="info">
+      <h2 class="repo-name">{{ repo.name }}</h2>
+      <p class="owner-name">by {{ repo.owner.login }}</p>
+    </div>
+  </div>
+
+  <p><strong>Description:</strong> {{ repo.description }}</p>
+  <p><strong>Stars:</strong> {{ repo.stargazers_count }}</p>
+  <p><strong>Open Issues:</strong> {{ repo.open_issues_count }}</p>
+
+  <a [href]="repo.html_url" target="_blank">View on GitHub</a>
+  <div class="rating-section">
+    <label>Rate this repository:</label>
+    <div class="stars">
+      <span
+        *ngFor="let star of [1, 2, 3, 4, 5]"
+        (click)="setRating(star)"
+        [class.filled]="star <= selectedRating"
+      >
+        ★
+      </span>
+    </div>
+  </div>
+</div>
