@@ -25,6 +25,7 @@ describe('RepoCardComponent', () => {
         avatar_url: 'https://example.com/avatar.png',
       },
       html_url: 'https://github.com/test-user/demo',
+      created_at: '2024-05-01T00:00:00Z',
     };
 
     fixture.detectChanges();
